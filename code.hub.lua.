@@ -3,6 +3,7 @@ local AdminUserId = 123456789 -- Substitua pelo seu ID de usuário
 
 local function createAdminPanel(player)
     local adminGui = Instance.new("ScreenGui", player.PlayerGui)
+    
     local frame = Instance.new("Frame", adminGui)
     frame.Size = UDim2.new(0, 400, 0, 300)
     frame.Position = UDim2.new(0.5, -200, 0.5, -150)
@@ -11,25 +12,41 @@ local function createAdminPanel(player)
 
     local openButton = Instance.new("TextButton", adminGui)
     openButton.Size = UDim2.new(0, 200, 0, 50)
-    openButton.Position = UDim2.new(0.5, -100, 0.9, -25)
-    openButton.Text = "CODE LUA HUB"
+    openButton.Position = UDim2.new(0, 10, 0, 10)
+    openButton.Text = "Code Hub Painel"
     
     openButton.MouseButton1Click:Connect(function()
         frame.Visible = not frame.Visible
     end)
 
+    local titleLabel = Instance.new("TextLabel", frame)
+    titleLabel.Size = UDim2.new(0, 400, 0, 50)
+    titleLabel.Position = UDim2.new(0, 0, 0, 0)
+    titleLabel.BackgroundTransparency = 1
+    titleLabel.Text = "CODE LUA HUB"
+    titleLabel.TextScaled = true
+    titleLabel.Font = Enum.Font.SourceSansBold
+
+    local subTitleLabel = Instance.new("TextLabel", frame)
+    subTitleLabel.Size = UDim2.new(0, 400, 0, 50)
+    subTitleLabel.Position = UDim2.new(0, 0, 0, 50)
+    subTitleLabel.BackgroundTransparency = 1
+    subTitleLabel.Text = "made by code lua/suysbs"
+    subTitleLabel.TextScaled = true
+    subTitleLabel.Font = Enum.Font.SourceSans
+
     local speedLabel = Instance.new("TextLabel", frame)
     speedLabel.Size = UDim2.new(0, 200, 0, 50)
-    speedLabel.Position = UDim2.new(0, 10, 0, 10)
+    speedLabel.Position = UDim2.new(0, 10, 0, 110)
     speedLabel.Text = "Change Speed:"
 
     local speedBox = Instance.new("TextBox", frame)
     speedBox.Size = UDim2.new(0, 100, 0, 50)
-    speedBox.Position = UDim2.new(0, 220, 0, 10)
+    speedBox.Position = UDim2.new(0, 220, 0, 110)
 
     local changeSpeedButton = Instance.new("TextButton", frame)
     changeSpeedButton.Size = UDim2.new(0, 100, 0, 50)
-    changeSpeedButton.Position = UDim2.new(0, 330, 0, 10)
+    changeSpeedButton.Position = UDim2.new(0, 330, 0, 110)
     changeSpeedButton.Text = "Set Speed"
 
     changeSpeedButton.MouseButton1Click:Connect(function()
@@ -41,16 +58,16 @@ local function createAdminPanel(player)
 
     local viewPlayerLabel = Instance.new("TextLabel", frame)
     viewPlayerLabel.Size = UDim2.new(0, 200, 0, 50)
-    viewPlayerLabel.Position = UDim2.new(0, 10, 0, 70)
+    viewPlayerLabel.Position = UDim2.new(0, 10, 0, 170)
     viewPlayerLabel.Text = "View Player Screen:"
 
     local playerBox = Instance.new("TextBox", frame)
     playerBox.Size = UDim2.new(0, 100, 0, 50)
-    playerBox.Position = UDim2.new(0, 220, 0, 70)
+    playerBox.Position = UDim2.new(0, 220, 0, 170)
 
     local viewButton = Instance.new("TextButton", frame)
     viewButton.Size = UDim2.new(0, 100, 0, 50)
-    viewButton.Position = UDim2.new(0, 330, 0, 70)
+    viewButton.Position = UDim2.new(0, 330, 0, 170)
     viewButton.Text = "View"
 
     viewButton.MouseButton1Click:Connect(function()
@@ -69,3 +86,4 @@ game.Players.PlayerAdded:Connect(function(player)
         createAdminPanel(player)
     end
 end)
+
