@@ -1,0 +1,71 @@
+-- Script básico de administrador para Roblox Brookhaven
+local AdminUserId = 123456789 -- Substitua pelo seu ID de usuário
+
+local function createAdminPanel(player)
+    local adminGui = Instance.new("ScreenGui", player.PlayerGui)
+    local frame = Instance.new("Frame", adminGui)
+    frame.Size = UDim2.new(0, 400, 0, 300)
+    frame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    frame.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+    frame.Visible = false
+
+    local openButton = Instance.new("TextButton", adminGui)
+    openButton.Size = UDim2.new(0, 200, 0, 50)
+    openButton.Position = UDim2.new(0.5, -100, 0.9, -25)
+    openButton.Text = "CODE LUA HUB"
+    
+    openButton.MouseButton1Click:Connect(function()
+        frame.Visible = not frame.Visible
+    end)
+
+    local speedLabel = Instance.new("TextLabel", frame)
+    speedLabel.Size = UDim2.new(0, 200, 0, 50)
+    speedLabel.Position = UDim2.new(0, 10, 0, 10)
+    speedLabel.Text = "Change Speed:"
+
+    local speedBox = Instance.new("TextBox", frame)
+    speedBox.Size = UDim2.new(0, 100, 0, 50)
+    speedBox.Position = UDim2.new(0, 220, 0, 10)
+
+    local changeSpeedButton = Instance.new("TextButton", frame)
+    changeSpeedButton.Size = UDim2.new(0, 100, 0, 50)
+    changeSpeedButton.Position = UDim2.new(0, 330, 0, 10)
+    changeSpeedButton.Text = "Set Speed"
+
+    changeSpeedButton.MouseButton1Click:Connect(function()
+        local speed = tonumber(speedBox.Text)
+        if speed then
+            player.Character.Humanoid.WalkSpeed = speed
+        end
+    end)
+
+    local viewPlayerLabel = Instance.new("TextLabel", frame)
+    viewPlayerLabel.Size = UDim2.new(0, 200, 0, 50)
+    viewPlayerLabel.Position = UDim2.new(0, 10, 0, 70)
+    viewPlayerLabel.Text = "View Player Screen:"
+
+    local playerBox = Instance.new("TextBox", frame)
+    playerBox.Size = UDim2.new(0, 100, 0, 50)
+    playerBox.Position = UDim2.new(0, 220, 0, 70)
+
+    local viewButton = Instance.new("TextButton", frame)
+    viewButton.Size = UDim2.new(0, 100, 0, 50)
+    viewButton.Position = UDim2.new(0, 330, 0, 70)
+    viewButton.Text = "View"
+
+    viewButton.MouseButton1Click:Connect(function()
+        local targetPlayer = game.Players:FindFirstChild(playerBox.Text)
+        if targetPlayer then
+            local targetCamera = targetPlayer.Character:FindFirstChildOfClass("Humanoid"):FindFirstChildOfClass("Camera")
+            if targetCamera then
+                player.Camera.CameraSubject = targetCamera
+            end
+        end
+    end)
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    if player.UserId == AdminUserId then
+        createAdminPanel(player)
+    end
+end)
